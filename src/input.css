@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
 @import "tailwindcss";
+
+@theme {
+    --font-sans: 'Berkshire Swash', cursive;
+}
 
 @keyframes fadeIn {
     from { 
