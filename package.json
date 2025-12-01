@@ -1,0 +1,14 @@
+{
+  "name": "advent-calendar",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build:css:prod": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "serve": "node server.js",
+    "dev": "npm run build:css & npm run serve"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}
