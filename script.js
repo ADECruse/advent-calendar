@@ -158,31 +158,43 @@ class AdventCalendar {
     modalTitle.textContent = dayData.title || `Day ${dayData.day}`;
     modalContent.innerHTML = "";
 
-    if (dayData.type === "photo") {
+    // Support both new format (photo/message fields) and old format (type/content)
+    const photoUrl = dayData.photo || (dayData.type === "photo" ? dayData.content : null);
+    const message = dayData.message || (dayData.type === "message" ? dayData.content : null);
+
+    // Display photo if available
+    if (photoUrl) {
       const img = document.createElement("img");
-      img.src = dayData.content;
+      img.src = photoUrl;
       img.alt = dayData.title || `Day ${dayData.day}`;
-      img.className = "w-full h-auto rounded-lg shadow-md";
+      img.className = "w-full h-auto rounded-lg shadow-md mb-4";
       img.onerror = () => {
-        modalContent.innerHTML = `
-                    <div class="text-center py-8">
-                        <p class="text-red-500 mb-4">Failed to load image</p>
-                        <p class="text-gray-600">Path: ${dayData.content}</p>
-                    </div>
-                `;
+        const errorDiv = document.createElement("div");
+        errorDiv.className = "text-center py-8 mb-4 bg-red-50 rounded-lg";
+        errorDiv.innerHTML = `
+          <p class="text-red-500 mb-2 font-semibold">Failed to load image</p>
+          <p class="text-gray-600 text-sm">Path: ${photoUrl}</p>
+        `;
+        modalContent.appendChild(errorDiv);
       };
       modalContent.appendChild(img);
-    } else if (dayData.type === "message") {
+    }
+
+    // Display message if available
+    if (message) {
       const messageDiv = document.createElement("div");
       messageDiv.className = "text-lg text-gray-700 whitespace-pre-wrap";
-      messageDiv.textContent = dayData.content;
+      messageDiv.textContent = message;
       modalContent.appendChild(messageDiv);
-    } else {
+    }
+
+    // If neither photo nor message, show error
+    if (!photoUrl && !message) {
       modalContent.innerHTML = `
-                <div class="text-center py-8">
-                    <p class="text-gray-600">Unknown content type: ${dayData.type}</p>
-                </div>
-            `;
+        <div class="text-center py-8">
+          <p class="text-gray-600">No content found for this day.</p>
+        </div>
+      `;
     }
 
     modal.classList.remove("hidden");

@@ -34,7 +34,20 @@ An interactive advent calendar website with 24 windows that reveal photos or mes
 
 ## Configuration
 
-Edit `content.json` to customize the content for each day. The structure is:
+Edit `content.json` to customize the content for each day. You can include both a photo and a message, or just one of them.
+
+### New Format (Recommended)
+
+```json
+{
+  "day": 1,
+  "photo": "images/day1.jpg",      // Optional: path/URL to an image
+  "message": "Your message here",   // Optional: text message
+  "title": "Day 1 - Title"
+}
+```
+
+### Legacy Format (Still Supported)
 
 ```json
 {
@@ -45,28 +58,44 @@ Edit `content.json` to customize the content for each day. The structure is:
 }
 ```
 
-### Content Types
+### Examples
 
-- **photo**: Set `type` to `"photo"` and `content` to the path/URL of an image
-- **message**: Set `type` to `"message"` and `content` to your text message
-
-### Example
-
+**Both photo and message:**
 ```json
-[
-  {
-    "day": 1,
-    "type": "photo",
-    "content": "images/day1.jpg",
-    "title": "Day 1"
-  },
-  {
-    "day": 2,
-    "type": "message",
-    "content": "You're amazing! ❤️",
-    "title": "Day 2"
-  }
-]
+{
+  "day": 1,
+  "photo": "images/day1.jpg",
+  "message": "Look at this beautiful photo! ❤️",
+  "title": "Day 1"
+}
+```
+
+**Just a photo:**
+```json
+{
+  "day": 2,
+  "photo": "images/day2.jpg",
+  "title": "Day 2"
+}
+```
+
+**Just a message:**
+```json
+{
+  "day": 3,
+  "message": "You're amazing! ❤️",
+  "title": "Day 3"
+}
+```
+
+**Legacy format (still works):**
+```json
+{
+  "day": 4,
+  "type": "photo",
+  "content": "images/day4.jpg",
+  "title": "Day 4"
+}
 ```
 
 ## File Structure
