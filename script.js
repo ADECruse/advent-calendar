@@ -102,7 +102,7 @@ class AdventCalendar {
         `;
 
     const dayNumber = document.createElement("div");
-    dayNumber.className = "text-4xl font-bold text-white drop-shadow-lg";
+    dayNumber.className = "text-7xl font-bold text-white drop-shadow-lg";
     dayNumber.textContent = day;
 
     windowDiv.appendChild(dayNumber);
