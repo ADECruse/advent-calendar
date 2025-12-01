@@ -253,17 +253,28 @@ class SnowAnimation {
   constructor() {
     this.container = document.getElementById("snow-container");
     this.snowflakes = [];
-    this.snowflakeCount = 50; // Number of snowflakes
     this.snowflakeSymbols = ["❄", "❅", "❆", "•"];
+    this.intervalId = null;
     this.init();
   }
 
   init() {
     if (!this.container) return;
 
-    // Create snowflakes
-    for (let i = 0; i < this.snowflakeCount; i++) {
+    // Create initial batch of snowflakes
+    for (let i = 0; i < 30; i++) {
       this.createSnowflake();
+    }
+
+    // Continuously create new snowflakes every 300ms
+    this.intervalId = setInterval(() => {
+      this.createSnowflake();
+    }, 300);
+  }
+
+  destroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
 
@@ -298,11 +309,14 @@ class SnowAnimation {
     this.container.appendChild(snowflake);
     this.snowflakes.push(snowflake);
 
-    // Remove and recreate snowflake after it falls
+    // Remove snowflake after it falls (it will be replaced by continuous creation)
     setTimeout(() => {
       if (snowflake.parentNode) {
         snowflake.remove();
-        this.createSnowflake();
+        const index = this.snowflakes.indexOf(snowflake);
+        if (index > -1) {
+          this.snowflakes.splice(index, 1);
+        }
       }
     }, (fallDuration + delay) * 1000);
   }
