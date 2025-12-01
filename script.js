@@ -159,8 +159,10 @@ class AdventCalendar {
     modalContent.innerHTML = "";
 
     // Support both new format (photo/message fields) and old format (type/content)
-    const photoUrl = dayData.photo || (dayData.type === "photo" ? dayData.content : null);
-    const message = dayData.message || (dayData.type === "message" ? dayData.content : null);
+    const photoUrl =
+      dayData.photo || (dayData.type === "photo" ? dayData.content : null);
+    const message =
+      dayData.message || (dayData.type === "message" ? dayData.content : null);
 
     // Display photo if available
     if (photoUrl) {
@@ -246,9 +248,73 @@ class AdventCalendar {
   }
 }
 
+// Snow Animation Class
+class SnowAnimation {
+  constructor() {
+    this.container = document.getElementById("snow-container");
+    this.snowflakes = [];
+    this.snowflakeCount = 50; // Number of snowflakes
+    this.snowflakeSymbols = ["❄", "❅", "❆", "•"];
+    this.init();
+  }
+
+  init() {
+    if (!this.container) return;
+
+    // Create snowflakes
+    for (let i = 0; i < this.snowflakeCount; i++) {
+      this.createSnowflake();
+    }
+  }
+
+  createSnowflake() {
+    const snowflake = document.createElement("div");
+    snowflake.className = "snowflake";
+
+    // Random properties
+    const size = Math.random() * 0.8 + 0.4; // 0.4em to 1.2em
+    const left = Math.random() * 100; // 0% to 100%
+    const fallDuration = Math.random() * 15 + 20; // 3s to 6s (faster fall)
+    const initialTop = Math.random() * -100; // Start at random positions above viewport
+    const delay = Math.random() * 2; // 0s to 2s
+    const swayAmount = (Math.random() - 0.5) * 100; // -50px to 50px horizontal drift
+    const symbol =
+      this.snowflakeSymbols[
+        Math.floor(Math.random() * this.snowflakeSymbols.length)
+      ];
+
+    // Apply styles
+    snowflake.textContent = symbol;
+    snowflake.style.left = `${left}%`;
+    snowflake.style.top = `${initialTop}px`;
+    snowflake.style.fontSize = `${size}em`;
+    snowflake.style.opacity = Math.random() * 0.5 + 0.5; // 0.5 to 1.0
+    snowflake.style.setProperty("--sway-amount", `${swayAmount}px`);
+
+    // Single animation that combines fall and sway
+    snowflake.style.animation = `fall ${fallDuration}s linear infinite`;
+    snowflake.style.animationDelay = `${delay}s`;
+
+    this.container.appendChild(snowflake);
+    this.snowflakes.push(snowflake);
+
+    // Remove and recreate snowflake after it falls
+    setTimeout(() => {
+      if (snowflake.parentNode) {
+        snowflake.remove();
+        this.createSnowflake();
+      }
+    }, (fallDuration + delay) * 1000);
+  }
+}
+
 // Initialize the calendar when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM loaded, initializing calendar...");
+
+  // Initialize snow animation
+  new SnowAnimation();
+
   try {
     new AdventCalendar();
   } catch (error) {

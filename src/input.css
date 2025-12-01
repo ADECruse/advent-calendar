@@ -41,3 +41,45 @@
     pointer-events: none;
 }
 
+/* Snow animation */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    pointer-events: none;
+    z-index: 40;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    color: white;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    user-select: none;
+    opacity: 0.8;
+    will-change: transform;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(calc(25vh + 100px)) translateX(calc(var(--sway-amount, 0px) * 0.5));
+    }
+    50% {
+        transform: translateY(calc(50vh + 200px)) translateX(var(--sway-amount, 0px));
+    }
+    75% {
+        transform: translateY(calc(75vh + 300px)) translateX(calc(var(--sway-amount, 0px) * 0.5));
+    }
+    100% {
+        transform: translateY(calc(100vh + 400px)) translateX(0);
+    }
+}
+
