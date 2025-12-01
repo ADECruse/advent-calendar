@@ -90,6 +90,7 @@ class AdventCalendar {
     const windowDiv = document.createElement("div");
     windowDiv.className = `
             relative aspect-square rounded-lg shadow-lg transition-all duration-300
+            border-4 border-yellow-600
             ${
               isOpened
                 ? "bg-gradient-to-br from-green-400 to-green-600 cursor-pointer hover:scale-105"

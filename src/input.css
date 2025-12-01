@@ -3,6 +3,7 @@
 
 @theme {
     --font-sans: 'Berkshire Swash', cursive;
+    --color-gold: #d4af37;
 }
 
 @keyframes fadeIn {
