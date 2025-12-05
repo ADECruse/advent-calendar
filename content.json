@@ -15,8 +15,9 @@
   },
   {
     "day": 3,
+    "photo": "images/where-is.jpg",
     "type": "message",
-    "content": "Three days in! You're on a roll! ⭐",
+    "content": "Where is the one and only? 🤔",
     "title": "Day 3"
   },
   {
@@ -35,14 +36,16 @@
   },
   {
     "day": 6,
+    "photo": "images/chips.jpg",
     "type": "message",
-    "content": "Day 6 - You're amazing! ✨",
+    "content": "Mmmm.. so tasty! 🤤",
     "title": "Day 6"
   },
   {
     "day": 7,
+    "photo": "images/home.jpg",
     "type": "message",
-    "content": "One week down! Keep going! 🌟",
+    "content": "You're coming home! 🤩",
     "title": "Day 7"
   },
   {
